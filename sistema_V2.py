@@ -1,6 +1,6 @@
 import textwrap
 
-def menu ():
+def menu():
     menu = """\n
     ========== MENU ==========
     [d]\tDepositar
@@ -11,10 +11,8 @@ def menu ():
     [nu]\tNovo Usuário
     [q]\tSair
     => """
-    
     return input(textwrap.dedent(menu)).lower()
-    
-    
+
 def depositar(saldo, valor, extrato, /):
     if valor > 0:
         saldo += valor
@@ -23,8 +21,7 @@ def depositar(saldo, valor, extrato, /):
     else:
         print("Valor inválido para depósito.")
     return saldo, extrato    
-    
-    
+
 def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saque):
     excedeu_saldo = valor > saldo
     excedeu_limite = valor > limite
@@ -44,13 +41,13 @@ def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saque):
     else:
         print("Valor inválido para saque.")
     return saldo, extrato    
-    
+
 def exibir_extrato(saldo, /, *, extrato):
     print("\n================ EXTRATO ================")
     print("Não foram realizadas movimentações." if not extrato else extrato)
     print(f"\nSaldo:\t\t R$ {saldo:.2f}")
     print("==========================================\n")   
-    
+
 def criar_usuario(usuarios):
     cpf = input("Informe o CPF (somente números): ")
     usuario = filtrar_usuario(cpf, usuarios)
@@ -63,29 +60,17 @@ def criar_usuario(usuarios):
     
     usuarios.append({"nome": nome, "data_nascimento": data_nascimento, "cpf": cpf, "endereco": endereco})
     print(f"Usuário {nome} cadastrado com sucesso!")
-    
-    
-    if usuario:
-        print("Já existe usuário com esse CPF!")
-        return
-    
-    nome = input("Informe o nome completo: ")
-    data_nascimento = input("Informe a data de nascimento (dd-mm-yyyy): ")
-    endereco = input("Informe o endereço (logradouro, número - bairro - cidade/UF): ")
-    
-    usuarios.append({"nome": nome, "data_nascimento": data_nascimento, "cpf": cpf, "endereco": endereco})
-    print(f"Usuário {nome} cadastrado com sucesso!")    
- 
+
 def filtrar_usuario(cpf, usuarios):
     usuarios_filtrados = [usuario for usuario in usuarios if usuario["cpf"] == cpf]
     return usuarios_filtrados[0] if usuarios_filtrados else None 
- 
+
 def criar_conta(agencia, numero_conta, usuarios):
     cpf = input("Informe o CPF do usuário: ")
     usuario = filtrar_usuario(cpf, usuarios)
     
     if usuario:
-        print("conta criada com sucesso!")
+        print("Conta criada com sucesso!")
         return {"agencia": agencia, "numero_conta": numero_conta, "usuario": usuario} 
     
     print("Usuário não encontrado, conta não criada!")
@@ -153,7 +138,5 @@ def main():
         else:
             print("Operação inválida, por favor selecione novamente a operação desejada.")
             
-
 main()
-            
-                            
+
